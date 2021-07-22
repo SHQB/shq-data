@@ -12,7 +12,7 @@ and apply some corrective measure to improve it
 
 ### example of plog command
 
-``sh
+```sh
 plog I am happy
 plog did bike
 
