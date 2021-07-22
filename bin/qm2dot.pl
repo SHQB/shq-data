@@ -184,7 +184,7 @@ sub computeMerkleRoot {
   print DOT qq' //node [ fontsize=28 ];\n';
   print DOT qq' //edge[style=invis];\n';
   print DOT qq' edge [ penwidth=2 ];\n';
-  printf DOT qq' label="Date: %s (tics: %s)\ncourtery: Doctor IT <michelc\@drit.ml>";\n',&hdate($tic),$tic;
+  printf DOT qq' label="Date: %s, nodes: %d (tics: %s)\ncourtery: Doctor IT <michelc\@drit.ml>";\n',&hdate($tic),$n,$tic;
   
   
   for my $j (0 .. $n-1) { # 1st layer !

@@ -38,9 +38,11 @@ else
    "I am") plogf=mood;;
    *am) plogf=mood;;
    *have) plogf=$rname;;
+   *had) plogf=$rname;;
    peed*) plogf=peelog;;
    breakfast) plogf=meals;;
    lunch) plogf=meals;;
+   snack) plogf=meals;;
    dinner) plogf=meals;;
    *) plogf=$rname;
  esac
@@ -50,11 +52,26 @@ fi
 if [ "x$1" != 'x' ]; then
 echo "$tics: $what $*"
 echo "$tics:$whatp $* # $time" >> $rootdir/_data/$plogf.yml
+if [ -e qm.log.ots ]; then
+ots upgrade qm.log.ots
+git add qm.log.ots
+mv -f qm.log.ots qmprev.log.ots
+rm -f qmprev.log.ots.bak
+ots upgrade qmprev.log.ots
+fi
 tic=$(date +%s%N | cut -c-13)
 qm=$(ipfs add -r . -Q)
 echo $tic: $qm >> qm.log
+ots stamp qm.log
 else
 qm=$(ipfs add -r . -Q)
+if [ -e qm.log.ots ]; then
+  #rm -f qm.log.ots.bak
+  ots upgrade qm.log.ots
+  git add qm.log.ots
+else
+  ots stamp qm.log
+fi
 fi
 
 if [ "do$sim" = 'do' ]; then
